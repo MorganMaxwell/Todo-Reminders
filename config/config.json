@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "exampledb",
+    "password": "34XYkf*5",
+    "database": "tododb",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "34XYkf*5",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",
