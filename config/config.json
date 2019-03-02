@@ -8,8 +8,8 @@
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "testdb",
+    "password": "Med587!@",
+    "database": "reminder_db",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
