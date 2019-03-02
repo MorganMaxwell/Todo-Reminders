@@ -1,18 +1,32 @@
 {{#if completed}}
-    <tr>
-        <td>{{name}}</td>
-        <td>{{description}}</td>
-        <td>{{completed}}</td>
-        <td><a class="waves-effect waves-light btn-small">Delete</a></td>
-    </tr>
+<tr>
+    <td>{{name}}</td>
+    <td>{{description}}</td>
+    <td>
+        <p>
+            <label>
+                <input type="checkbox" class="filled-in" checked="checked"/>
+                <span>Complete</span>
+            </label>
+        </p>
+    </td>
+    <td><a class="waves-effect waves-light btn-small">Delete</a></td>
+</tr>
 {{/if}}
 
 {{#unless completed}}
 {{!-- style to be grayed out or something --}}
-    <tr>
-        <td>{{name}}</td>
-        <td>{{description}}</td>
-        <td>{{completed}}</td>
-        <td><a class="waves-effect waves-light btn-small">Delete</a></td>
-    </tr>
+<tr>
+    <td>{{name}}</td>
+    <td>{{description}}</td>
+    <td>
+        <p>
+            <label>
+                <input type="checkbox" class="filled-in" checked="checked" />
+                <span>Complete</span>
+            </label>
+        </p>
+    </td>
+    <td><a class="waves-effect waves-light btn-small">Delete</a></td>
+</tr>
 {{/unless}}

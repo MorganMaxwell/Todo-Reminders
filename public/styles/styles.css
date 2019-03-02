@@ -1,7 +1,21 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
 form.signup,
 form.login {
   margin-top: 50px;
+}
+
+#modalButton {
+  width: 30%;
 }
