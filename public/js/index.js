@@ -1,5 +1,5 @@
-//var moment = require('moment');
-//moment().format();
+var moment = require('moment');
+moment("MM-DD-YYYY").format();
 
 // Get references to page elements
 var $exampleText = $("#example-text");

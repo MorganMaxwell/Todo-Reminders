@@ -19,15 +19,23 @@
           <tr>
             <th class="highlight">Name</th>
             <th class="highlight">Description</th>
+            <th class="highlight">Date</th>
             <th class="highlight">Completed</th>
             <th class="highlight">Delete</th>
           </tr>
         </thead>
-        
+
         <tbody>
           <tr>
             {{#each todos}}
             {{#unless }}
+            <td>Take out the trash</td>
+            <td>Take out today</td>
+            <td>3/24</td>
+            <td><button id="completed-btn"></button></td>
+            <td><button id="delete-btn"></button></td>
+            {{/unless}}
+            {{/each}}
           </tr>
         </tbody>
       </table>
