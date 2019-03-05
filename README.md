@@ -14,6 +14,7 @@ Remindr is a to-do web app designed to remind the user to complete a task.
 ---
 ## Technologies
 * Materialize
+* JavaScript
 * AJAX
 * Node
 * Express
@@ -22,3 +23,9 @@ Remindr is a to-do web app designed to remind the user to complete a task.
 ---
 ## APIs
 * Nodemailer
+---
+##How to use
+1. Create an account
+2. Add tasks at the bottom of the screen
+3. After creating a new task, it'll appear at the top
+  *  If it does not appear at the top, use the navigation bar on the left hand side to search for the task
