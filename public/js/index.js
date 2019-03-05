@@ -1,105 +1,90 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // Get references to page elements
-  var $exampleText = $("#example-text");
-  var $exampleDescription = $("#example-description");
-  var $submitBtn = $("#submit");
-  var $exampleList = $("#example-list");
+  var userId = "";
 
-  // The API object contains methods for each kind of request we'll make
-  var API = {
-    saveExample: function(example) {
-      return $.ajax({
-        headers: {
-          "Content-Type": "application/json"
-        },
-        type: "POST",
-        url: "api/examples",
-        data: JSON.stringify(example)
-      });
-    },
-    getExamples: function() {
-      return $.ajax({
-        url: "api/examples",
-        type: "GET"
-      });
-    },
-    deleteExample: function(id) {
-      return $.ajax({
-        url: "api/examples/" + id,
-        type: "DELETE"
-      });
-    }
+  // have to have the userId for the rest of the data to be retrieved from db properly
+  function getUserData() {
+    $.ajax("/api/user_data", {
+      method: "GET"
+    }).then(function (result) {
+      // store user's specific ID on a global variable.
+      userId = result.id;
+    });
+    return userId;
   };
 
-  // refreshExamples gets new examples from the db and repopulates the list
-  var refreshExamples = function() {
-    API.getExamples().then(function(data) {
-      var $examples = data.map(function(example) {
-        var $a = $("<a>")
-          .text(example.text)
-          .attr("href", "/example/" + example.id);
-
-        var $li = $("<li>")
-          .attr({
-            class: "list-group-item",
-            "data-id": example.id
-          })
-          .append($a);
-
-        var $button = $("<button>")
-          .addClass("btn btn-danger float-right delete")
-          .text("ｘ");
-
-        $li.append($button);
-
-        return $li;
+  // grab data from the database that matches the user's ID #
+  function getUserTodos() {
+    $.ajax("/api/todos/" + userId, {
+      method: "GET"
+    }).then(function (result) {
+      res.render("index", { todos: result }, function (err) {
+        if (err) throw err;
       });
-
-      $exampleList.empty();
-      $exampleList.append($examples);
     });
   };
 
-  // handleFormSubmit is called whenever we submit a new example
-  // Save the new example to the db and refresh the list
-  var handleFormSubmit = function(event) {
-    event.preventDefault();
-
-    var example = {
-      text: $exampleText.val().trim(),
-      description: $exampleDescription.val().trim()
+  // push a new Todo to the database
+  function newTodo() {
+    let data = {
+      title: $("#title").val().trim(),
+      description: $("#description").val().trim(),
+      category: $("#category").val().trim(),
+      // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
+      recurring: $("checkbox").val().trim(),
+      date: moment().format(),
+      userId: userId,
     };
-
-    if (!(example.text && example.description)) {
-      alert("You must enter an example text and description!");
-      return;
-    }
-
-    API.saveExample(example).then(function() {
-      refreshExamples();
+    $.ajax("/api/createNew/" + userId, {
+      method: "POST",
+      data: data
+    }).then(function (result) {
+      location.reload();
     });
-
-    $exampleText.val("");
-    $exampleDescription.val("");
+  };
+  // put route to edit a Todo. just rewrites the whole thing,
+  // whether new data exists or not.
+  function editTodo() {
+    let data = {
+      title: $("#title").val().trim(),
+      description: $("#description").val().trim(),
+      category: $("#category").val().trim(),
+      // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
+      recurring: $("checkbox").val().trim(),
+      date: moment().format(),
+      userId: userId,
+      itemId: itemId
+    };
+    $.ajax("/api/createNew/" + userId, {
+      method: "PUT",
+      data: data
+    }).then(function (result) {
+      location.reload();
+    });
   };
 
   // handleDeleteBtnClick is called when an example's delete button is clicked
   // Remove the example from the db and refresh the list
-  var handleDeleteBtnClick = function() {
+  var handleDeleteBtnClick = function () {
     var idToDelete = $(this)
       .parent()
       .attr("data-id");
 
-    API.deleteExample(idToDelete).then(function() {
+    API.deleteExample(idToDelete).then(function () {
       refreshExamples();
     });
   };
 
   // Add event listeners to the submit and delete buttons
-  $submitBtn.on("click", handleFormSubmit);
-  $exampleList.on("click", ".delete", handleDeleteBtnClick);
-
+  $("#formSubmit").click(newTodo);
+  // not set up for functionality yet.
+  // edit a Todo
+  $("#formSubmit").click(editTodo);
   // open modal and allow collapsible checkboxes
   $(".modal").modal();
   $(".collapsible").collapsible();
+
+  // function calls
+  getUserData();
+  getUserTodos();
 });

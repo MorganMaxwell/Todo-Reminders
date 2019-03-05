@@ -1,22 +1,38 @@
-{{#if completed}}
+{{#unless completed}}
 <tr>
     <td>{{name}}</td>
     <td>{{description}}</td>
+    {{#if recurring}}
+    <td>
+            {{#if recDaily}}
+                Daily
+            {{/if}}
+            {{#if recWeekly}}
+                Weekly
+            {{/if}}
+            {{#if recMonthly}}
+                Monthly
+            {{/if}}
+            {{#if recYearly}}
+                Yearly
+            {{/if}}
+    </td>
+    {{/if}}
     <td>
         <p>
             <label>
-                <input type="checkbox" class="filled-in" checked="checked"/>
+                <input type="checkbox" class="filled-in" checked="checked" />
                 <span>Complete</span>
             </label>
         </p>
     </td>
-    <td><a class="waves-effect waves-light btn-small">Delete</a></td>
+    <td><a class="waves-effect waves-light btn-small" data-id="{{id}}">Delete</a></td>
 </tr>
-{{/if}}
+{{/unless}}
 
-{{#unless completed}}
+{{#if completed}}
 {{!-- style to be grayed out or something --}}
-<tr>
+<tr id="{{itemId}}">
     <td>{{name}}</td>
     <td>{{description}}</td>
     <td>
@@ -29,4 +45,4 @@
     </td>
     <td><a class="waves-effect waves-light btn-small">Delete</a></td>
 </tr>
-{{/unless}}
+{{/if}}
