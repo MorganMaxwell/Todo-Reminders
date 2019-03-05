@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Med587!@",
+    "password": "",
     "database": "reminder_db",
     "host": "localhost",
     "dialect": "mysql"
