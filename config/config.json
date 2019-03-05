@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "root",
-    "password": "34XYkf*5",
+    "password": "",
     "database": "reminder_db",
     "host": "localhost",
     "dialect": "mysql",

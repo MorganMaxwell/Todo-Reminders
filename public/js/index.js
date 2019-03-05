@@ -24,7 +24,6 @@ $(document).ready(function () {
     });
   };
 
-  
   // push a new Todo to the database
   function newTodo() {
     let data = {
@@ -75,6 +74,7 @@ $(document).ready(function () {
       refreshExamples();
     });
   };
+
 
   // Add event listeners to the submit and delete buttons
   $("#formSubmit").click(newTodo);
