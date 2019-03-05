@@ -18,12 +18,13 @@ $(document).ready(function () {
     $.ajax("/api/todos/" + userId, {
       method: "GET"
     }).then(function (result) {
-      res.render("index", { todos: result }, function (err) {
+      result.render("index", { todos: result }, function (err) {
         if (err) throw err;
       });
     });
   };
 
+  
   // push a new Todo to the database
   function newTodo() {
     let data = {

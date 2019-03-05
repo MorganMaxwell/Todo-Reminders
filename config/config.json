@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "",
+    "password": "34XYkf*5",
     "database": "reminder_db",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "Med587!@",
+    "password": "34XYkf*5",
     "database": "reminder_db",
     "host": "localhost",
     "dialect": "mysql",
