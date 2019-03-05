@@ -33,7 +33,11 @@
         
         <tbody>
           <tr>
-           
+           {{#each todos}}
+             {{#unless deleted}}
+             {{> todos/todoTable}}
+             {{/unless}}
+             {{/each}}
           </tr>
         </tbody>
         
