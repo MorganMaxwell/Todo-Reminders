@@ -1,8 +1,8 @@
-#Remindr
+# Remindr
 https://github.com/MorganMaxwell/Todo-Reminders
 
 ---
-##Built By
+## Built By
 * [Igor Baveda](https://github.com/ibaveda)
 * [Devin Udy](https://github.com/dmudy)
 * [Jason Harris](https://github.com/jasonharris06)
