@@ -1,3 +1,4 @@
+console.log("am i loaded");
 $(document).ready(function() {
   // Getting references to our form and inputs
   var loginForm = $("form.login");
@@ -13,6 +14,7 @@ $(document).ready(function() {
     };
 
     if (!userData.email || !userData.password) {
+      console.log(userData.email);
       return;
     }
 
@@ -24,6 +26,7 @@ $(document).ready(function() {
 
   // loginUser does a post to our "api/login" route and if successful, redirects us the the index page
   function loginUser(email, password) {
+    console.log("inside login user", email, password);
     $.post("/api/login", {
       email: email,
       password: password
