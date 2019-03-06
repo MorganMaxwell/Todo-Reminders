@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Get references to page elements
-  var userId = $(".member-name").attr("data-id");
+  var userId = 1;
   // grab data from the database that matches the user's ID #
   function getUserTodos() {
     $.ajax("/api/todos/" + userId, {
@@ -10,28 +10,32 @@ $(document).ready(function () {
 
   // push a new Todo to the database
   function newTodo() {
-     console.log("index.js ln 30")
+    console.log("index.js ln 30")
+    let date = new Date();
     let data = {
-      title: "title",
+      title: $("#title").val().trim(),
       description: $("#description").val().trim(),
       category: $("#category").val().trim(),
+      recurring: false,
+      recurringTime: false,
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
-      recurringTime: $("input[name=group3]:checked").val().trim(),
-      date: moment().format(),
+      date: date,
       userId: userId,
     };
     console.log(data);
-    if (data.recurringTime) {
+    if ("recurring was opened/checked/idkwtf") {
       data.recurring = true;
+      data.recurringTime = $("input[name=group3]:checked").val()
     };
-    $.ajax("/api/createNew/" + userId, {
+    $.ajax("/api/createNew/", {
       method: "POST",
       data: data
     }).then(function (result) {
-      // location.reload();
+      console.log(result);
+      location.reload();
     });
   };
-  
+
   // put route to edit a Todo. just rewrites the whole thing,
   // whether new data exists or not.
   function editTodo() {
