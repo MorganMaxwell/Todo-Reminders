@@ -1,5 +1,6 @@
 var db = require("../models");
 var passport = require("../config/passport");
+var nodemailer = require("nodemailer");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -54,26 +55,45 @@ module.exports = function(app) {
   });
 
   //NodeMailer route post to /api/members/reminder/send
-  app.post("/api/members/reminder/send", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
-      // we know that the req.body will contain three key-value pairs:
-      // req.body.name
-      // req.body.email
-      // req.body.message
+  app.post("/api/members/reminder/send", function(req, res, next) {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'project2testuser@gmail.com',
+        pass: 'Password!@#'
+      }
+    })
+  
+    const mailOptions = {
+      // from: '"reminderApp :ghost:TESTING" <noreply@valenceservices.com',
+    from: '"Remindr" <noreply@remindr.com>',
+    replyto_name: "No Reply", //not defined properly but doesn't error code out
+    replyto_email: "noreply@remindr.com", //not defined properly but doesn't error code out
+    to: "project2testuser@gmail.com", // list of receivers
+    subject: "Reminder", // Subject line
+    text: 'Hello there, thanks for creating a reminder with us. We hope you enjoy using our App!', // plain text body
+    html: "<p>Hello there, thanks for creating a reminder with us. We hope you enjoy using our App!</p>", // html body
+    // attachDataUrls: link //company link
+      }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error, "error in sending email function");
+      }
+      console.log("Message sent: %s", info.messageId);
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     });
   });
 
   // Post route for Create New Item
   // ==============================================================
-  app.post("/api/createNew", function(req, res) {
-    console.log(req.body);
+  app.post("/api/createNew/", function (req, res) {
     db.Items.create({
       title: req.body.title,
       description: req.body.description,
       category: req.body.category,
       reoccurring: req.body.recurring,
-      duedate: req.body.date
+      dueDate: req.body.date
     })
       .then(function(dbItems) {
         console.log(dbItems);
