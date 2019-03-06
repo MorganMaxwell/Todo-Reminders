@@ -18,7 +18,7 @@ $(document).ready(function () {
     $.ajax("/api/todos/" + userId, {
       method: "GET"
     }).then(function (result) {
-      res.render("index", { todos: result }, function (err) {
+      result.render("index", { todos: result }, function (err) {
         if (err) throw err;
       });
     });
@@ -74,6 +74,7 @@ $(document).ready(function () {
       refreshExamples();
     });
   };
+
 
   // Add event listeners to the submit and delete buttons
   $("#formSubmit").click(newTodo);
