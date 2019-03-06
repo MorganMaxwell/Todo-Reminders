@@ -4,18 +4,18 @@
     <td>{{description}}</td>
     {{#if recurring}}
     <td>
-            {{#if recDaily}}
-                Daily
-            {{/if}}
-            {{#if recWeekly}}
-                Weekly
-            {{/if}}
-            {{#if recMonthly}}
-                Monthly
-            {{/if}}
-            {{#if recYearly}}
-                Yearly
-            {{/if}}
+        {{#if recDaily}}
+        Daily
+        {{/if}}
+        {{#if recWeekly}}
+        Weekly
+        {{/if}}
+        {{#if recMonthly}}
+        Monthly
+        {{/if}}
+        {{#if recYearly}}
+        Yearly
+        {{/if}}
     </td>
     {{/if}}
     <td>
@@ -26,7 +26,9 @@
             </label>
         </p>
     </td>
-    <td><a class="waves-effect waves-light btn-small" data-id="{{id}}">Delete</a></td>
+    <td><a class="waves-effect waves-light btn-small" id="del{{id}}" data-id="{{id}}">Delete</a></td>
+
+    <td><a class="waves-effect waves-light btn-small" id="edit{{id}}" data-id="{{id}}">Edit</a></td>
 </tr>
 {{/unless}}
 
