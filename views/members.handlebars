@@ -10,39 +10,40 @@
   </div>
 </nav>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <h2>Welcome <span class="member-name"></span></h2>
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <h2>Welcome <span class="member-name"></span></h2>
+      </div>
+      <div class="col s12">
+        <h2>Print Todos Here</h2>
+        <table>
+          <thead>
+            <tr>
+              <th class="highlight">Name</th>
+              <th class="highlight">Description</th>
+              <th class="highlight">Completed</th>
+              <th class="highlight">Delete</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              {{#each todos}}
+              {{#unless deleted}}
+              {{> todos/todoTable}}
+              {{/unless}}
+              {{/each}}
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
     </div>
-    <div class="col s12">
-      <h2>Print Todos Here</h2>
-      <table>
-        <thead>
-          <tr>
-            <th class="highlight">Name</th>
-            <th class="highlight">Description</th>
-            <th class="highlight">Completed</th>
-            <th class="highlight">Delete</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <tr>
-            {{#each todos}}
-            {{#unless deleted}}
-            {{> todos/todoTable}}
-            {{/unless}}
-            {{/each}}
-          </tr>
-        </tbody>
+    <a class="waves-effect waves-light btn modal-trigger" id="modalButton" href="#modal1">Create a New Reminder</a>
 
-      </table>
-    </div>
-  </div>
-
-  <a class="waves-effect waves-light btn modal-trigger" id="modalButton" href="#modal1">Create a New Reminder</a>
-  <div id="modalwrapper">
     <div id="modal1" class="modal">
       <div class="container">
         <div class="row">
@@ -95,6 +96,7 @@
                 </div>
               </li>
             </ul>
+              <input type="text" class="datepicker" placeholder="Due Date">
           </div>
           <div class="col s3 offset-s3">
             <button class="btn waves-effect waves-light" id="formSubmit" type="submit" name="action">Submit</button>
@@ -103,27 +105,20 @@
         </div>
       </div>
     </div>
+</main>
+
+<footer class="page-footer">
+  <div class="col s12">
+    <h5 class="white-text">Collaborators</h5>
+    <ul>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/ibaveda">Igor Baveda</a></li>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/dmudy">Devin Udy</a></li>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/jasonharris06">Jason Harris</a></li>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/MorganMaxwell">Morgan Maxwell</a></li>
+    </ul>
   </div>
-
-  </main>
-
-  <footer class="page-footer">
+  <div class="footer-copyright">
     <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h5 class="white-text">Collaborators</h5>
-          <ul>
-            <li><a class="grey-text text-lighten-3" href="https://github.com/ibaveda">Igor Baveda</a></li>
-            <li><a class="grey-text text-lighten-3" href="https://github.com/dmudy">Devin Udy</a></li>
-            <li><a class="grey-text text-lighten-3" href="https://github.com/jasonharris06">Jason Harris</a></li>
-            <li><a class="grey-text text-lighten-3" href="https://github.com/MorganMaxwell">Morgan Maxwell</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="footer-copyright">
-      <div class="container">
-        © 2019 Copyright
-      </div>
+      © 2019 Copyright
     </div>
   </footer>

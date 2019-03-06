@@ -1,29 +1,12 @@
 $(document).ready(function () {
   // Get references to page elements
-  var userId = "";
-  
-  // have to have the userId for the rest of the data to be retrieved from db properly
-  function getUserData() {
-    $.ajax("/api/user_data", {
-      method: "GET"
-    }).then(function (result) {
-      // store user's specific ID on a global variable.
-      userId = result.id;
-    });
-    return userId;
-  };
-
+  var userId = $(".member-name").attr("data-id");
   // grab data from the database that matches the user's ID #
   // function getUserTodos() {
   //   $.ajax("/api/todos/" + userId, {
   //     method: "GET"
-  //   }).then(function (result) {
-  //     result.render("index", { todos: result }, function (err) {
-  //       if (err) throw err;
-  //     });
   //   });
   // };
-
 
   // push a new Todo to the database
   function newTodo() {
@@ -33,15 +16,19 @@ $(document).ready(function () {
       description: $("#description").val().trim(),
       category: $("#category").val().trim(),
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
-      recurring: $('input[name=group3]:checked').val(),
-      // date: moment().format(),
+      recurringTime: $("input[name=group3]:checked").val().trim(),
+      date: moment().format(),
       userId: userId,
     };
-    $.ajax("/api/createNew/", {
+    console.log(data);
+    if (data.recurringTime) {
+      data.recurring = true;
+    };
+    $.ajax("/api/createNew/" + userId, {
       method: "POST",
       data: data
     }).then(function (result) {
-      location.reload();
+      // location.reload();
     });
   };
   
@@ -78,12 +65,20 @@ $(document).ready(function () {
     });
   };
 
+
+  // Add event listeners to the submit and delete buttons
+  $(document).on("submit", "#userTodo", newTodo);
+  // not set up for functionality yet.
+  // edit a Todo
+  $("#del" + userId).click(editTodo);
+  // open modal and allow collapsible checkboxes
   $(".modal").modal();
   $(".collapsible").collapsible();
-  $("#formSubmit").click(newTodo);
-
+  $(document).ready(function () {
+    $('.datepicker').datepicker();
+  });
 
   // function calls
-  getUserData();
+  // getUserData();
   // getUserTodos();
 });
