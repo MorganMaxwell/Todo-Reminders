@@ -1,47 +1,37 @@
 $(document).ready(function () {
   // Get references to page elements
-  var userId = "";
-
-  // have to have the userId for the rest of the data to be retrieved from db properly
-  function getUserData() {
-    $.ajax("/api/user_data", {
-      method: "GET"
-    }).then(function (result) {
-      // store user's specific ID on a global variable.
-      userId = result.id;
-    });
-    return userId;
-  };
-
+  var userId = $(".member-name").attr("data-id");
   // grab data from the database that matches the user's ID #
   function getUserTodos() {
     $.ajax("/api/todos/" + userId, {
       method: "GET"
-    }).then(function (result) {
-      result.render("index", { todos: result }, function (err) {
-        if (err) throw err;
-      });
     });
   };
 
   // push a new Todo to the database
   function newTodo() {
+     console.log("index.js ln 30")
     let data = {
-      title: $("#title").val().trim(),
+      title: "title",
       description: $("#description").val().trim(),
       category: $("#category").val().trim(),
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
-      recurring: $("checkbox").val().trim(),
+      recurringTime: $("input[name=group3]:checked").val().trim(),
       date: moment().format(),
       userId: userId,
+    };
+    console.log(data);
+    if (data.recurringTime) {
+      data.recurring = true;
     };
     $.ajax("/api/createNew/" + userId, {
       method: "POST",
       data: data
     }).then(function (result) {
-      location.reload();
+      // location.reload();
     });
   };
+  
   // put route to edit a Todo. just rewrites the whole thing,
   // whether new data exists or not.
   function editTodo() {
@@ -65,27 +55,18 @@ $(document).ready(function () {
 
   // handleDeleteBtnClick is called when an example's delete button is clicked
   // Remove the example from the db and refresh the list
-  var handleDeleteBtnClick = function () {
-    var idToDelete = $(this)
-      .parent()
-      .attr("data-id");
+  function deleteTodo() {
 
-    API.deleteExample(idToDelete).then(function () {
-      refreshExamples();
-    });
   };
-
 
   // Add event listeners to the submit and delete buttons
   $("#formSubmit").click(newTodo);
-  // not set up for functionality yet.
-  // edit a Todo
-  $("#formSubmit").click(editTodo);
-  // open modal and allow collapsible checkboxes
+  // open modal and close modal
   $(".modal").modal();
+  // collapsible list for recurring options
   $(".collapsible").collapsible();
-
+  // open calendar to pick Due Date
+  $('.datepicker').datepicker();
   // function calls
-  getUserData();
   getUserTodos();
 });
