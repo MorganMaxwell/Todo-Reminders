@@ -64,6 +64,20 @@ module.exports = function(app) {
     });
   });
 
+  // Post route for Create New Item
+  // ==============================================================
+  app.post("/api/createNew", function(req, res) {
+    db.Items.create({
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category,
+      reoccurring: req.body.recurring,
+      duedate: req.body.date
+    }).then(function(dbItems) {
+      res.json(dbItems);
+    });
+  });
+
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
     db.Example.destroy({ where: { id: req.params.id } }).then(function(
