@@ -37,6 +37,21 @@ module.exports = function (app) {
     });
   });
 
+  // Post route for Create New Item
+  // ==============================================================
+  app.post("/api/createNew/", function(req, res) {
+    db.Items.create({
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category,
+      reoccurring: req.body.recurring
+      //duedate: req.body.date
+    }).then(function(dbItems) {
+      console.log(dbItems);
+      res.json(dbItems);
+      console.log(dbItems);
+    });
+  });
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
     res.render("404");

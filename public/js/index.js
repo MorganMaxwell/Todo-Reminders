@@ -10,8 +10,9 @@ $(document).ready(function () {
 
   // push a new Todo to the database
   function newTodo() {
+     console.log("index.js ln 30")
     let data = {
-      title: $("#title").val().trim(),
+      title: "title",
       description: $("#description").val().trim(),
       category: $("#category").val().trim(),
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
@@ -30,6 +31,7 @@ $(document).ready(function () {
       // location.reload();
     });
   };
+  
   // put route to edit a Todo. just rewrites the whole thing,
   // whether new data exists or not.
   function editTodo() {
