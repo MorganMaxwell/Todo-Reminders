@@ -1,12 +1,29 @@
 $(document).ready(function () {
   // Get references to page elements
-  var userId = $(".member-name").attr("data-id");
-  // grab data from the database that matches the user's ID #
-  function getUserTodos() {
-    $.ajax("/api/todos/" + userId, {
+  var userId = "";
+  
+  // have to have the userId for the rest of the data to be retrieved from db properly
+  function getUserData() {
+    $.ajax("/api/user_data", {
       method: "GET"
+    }).then(function (result) {
+      // store user's specific ID on a global variable.
+      userId = result.id;
     });
+    return userId;
   };
+
+  // grab data from the database that matches the user's ID #
+  // function getUserTodos() {
+  //   $.ajax("/api/todos/" + userId, {
+  //     method: "GET"
+  //   }).then(function (result) {
+  //     result.render("index", { todos: result }, function (err) {
+  //       if (err) throw err;
+  //     });
+  //   });
+  // };
+
 
   // push a new Todo to the database
   function newTodo() {
@@ -16,19 +33,15 @@ $(document).ready(function () {
       description: $("#description").val().trim(),
       category: $("#category").val().trim(),
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
-      recurringTime: $("input[name=group3]:checked").val().trim(),
-      date: moment().format(),
+      recurring: $('input[name=group3]:checked').val(),
+      // date: moment().format(),
       userId: userId,
     };
-    console.log(data);
-    if (data.recurringTime) {
-      data.recurring = true;
-    };
-    $.ajax("/api/createNew/" + userId, {
+    $.ajax("/api/createNew/", {
       method: "POST",
       data: data
     }).then(function (result) {
-      // location.reload();
+      location.reload();
     });
   };
   
@@ -55,18 +68,22 @@ $(document).ready(function () {
 
   // handleDeleteBtnClick is called when an example's delete button is clicked
   // Remove the example from the db and refresh the list
-  function deleteTodo() {
+  var handleDeleteBtnClick = function () {
+    var idToDelete = $(this)
+      .parent()
+      .attr("data-id");
 
+    API.deleteExample(idToDelete).then(function () {
+      refreshExamples();
+    });
   };
 
-  // Add event listeners to the submit and delete buttons
-  $("#formSubmit").click(newTodo);
-  // open modal and close modal
   $(".modal").modal();
-  // collapsible list for recurring options
   $(".collapsible").collapsible();
-  // open calendar to pick Due Date
-  $('.datepicker').datepicker();
+  $("#formSubmit").click(newTodo);
+
+
   // function calls
-  getUserTodos();
+  getUserData();
+  // getUserTodos();
 });

@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     dueDate: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: true
       // validate: {
       //   isDate: true
       // }
@@ -50,12 +50,12 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  Items.associate = function(models) {
-    Items.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: true
-      }
-    });
-  };
+  // Items.associate = function(models) {
+  //   Items.belongsTo(models.User, {
+  //     foreignKey: {
+  //       allowNull: true
+  //     }
+  //   });
+  // };
   return Items;
 };
