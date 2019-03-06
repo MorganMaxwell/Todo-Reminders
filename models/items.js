@@ -16,14 +16,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1, 10]
       }
     },
     dueDate: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         isDate: true
       }
@@ -53,7 +53,7 @@ module.exports = function(sequelize, DataTypes) {
   Items.associate = function(models) {
     Items.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false
+        allowNull: true
       }
     });
   };
