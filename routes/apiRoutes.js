@@ -66,7 +66,7 @@ module.exports = function (app) {
 
   // Post route for Create New Item
   // ==============================================================
-  app.post("/api/createNew", function (req, res) {
+  app.post("/api/createNew/", function (req, res) {
     db.Items.create({
       title: req.body.title,
       description: req.body.description,
