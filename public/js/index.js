@@ -2,11 +2,11 @@ $(document).ready(function () {
   // Get references to page elements
   var userId = $(".member-name").attr("data-id");
   // grab data from the database that matches the user's ID #
-  // function getUserTodos() {
-  //   $.ajax("/api/todos/" + userId, {
-  //     method: "GET"
-  //   });
-  // };
+  function getUserTodos() {
+    $.ajax("/api/todos/" + userId, {
+      method: "GET"
+    });
+  };
 
   // push a new Todo to the database
   function newTodo() {
@@ -53,30 +53,18 @@ $(document).ready(function () {
 
   // handleDeleteBtnClick is called when an example's delete button is clicked
   // Remove the example from the db and refresh the list
-  var handleDeleteBtnClick = function () {
-    var idToDelete = $(this)
-      .parent()
-      .attr("data-id");
+  function deleteTodo() {
 
-    API.deleteExample(idToDelete).then(function () {
-      refreshExamples();
-    });
   };
 
-
   // Add event listeners to the submit and delete buttons
-  $(document).on("submit", "#userTodo", newTodo);
-  // not set up for functionality yet.
-  // edit a Todo
-  $("#del" + userId).click(editTodo);
-  // open modal and allow collapsible checkboxes
+  $("#formSubmit").click(newTodo);
+  // open modal and close modal
   $(".modal").modal();
+  // collapsible list for recurring options
   $(".collapsible").collapsible();
-  $(document).ready(function () {
-    $('.datepicker').datepicker();
-  });
-
+  // open calendar to pick Due Date
+  $('.datepicker').datepicker();
   // function calls
-  // getUserData();
-  // getUserTodos();
+  getUserTodos();
 });
