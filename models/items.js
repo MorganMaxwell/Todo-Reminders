@@ -24,9 +24,9 @@ module.exports = function(sequelize, DataTypes) {
     dueDate: {
       type: DataTypes.STRING,
       allowNull: true,
-      validate: {
-        isDate: true
-      }
+      // validate: {
+      //   isDate: true
+      // }
     },
     reoccurring: {
       type: DataTypes.BOOLEAN,
