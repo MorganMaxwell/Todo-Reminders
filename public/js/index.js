@@ -5,6 +5,7 @@ $(document).ready(function () {
   // have to have the userId for the rest of the data to be retrieved from db properly
   function getUserData() {
     $.ajax("/api/user_data", {
+
       method: "GET"
     }).then(function (result) {
       // store user's specific ID on a global variable.
@@ -27,11 +28,14 @@ $(document).ready(function () {
 
   // push a new Todo to the database
   function newTodo() {
-     console.log("index.js ln 30")
+    console.log("index.js ln 30")
+    let date = new Date();
     let data = {
-      title: "title",
+      title: $("#title").val().trim(),
       description: $("#description").val().trim(),
       category: $("#category").val().trim(),
+      recurring: false,
+      recurringTime: false,
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
       recurring: $('input[name=group3]:checked').val(),
       // date: moment().format(),
@@ -44,7 +48,7 @@ $(document).ready(function () {
       location.reload();
     });
   };
-  
+
   // put route to edit a Todo. just rewrites the whole thing,
   // whether new data exists or not.
   function editTodo() {
