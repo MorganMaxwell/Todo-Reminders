@@ -54,13 +54,27 @@ module.exports = function(app) {
   });
 
   //NodeMailer route post to /api/members/reminder/send
-  app.post("/api/members/reminder/send", function(req, res, next) {
+  app.post("/api/members/reminder/send", function(req, res) {
     db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
       // we know that the req.body will contain three key-value pairs:
       // req.body.name
       // req.body.email
       // req.body.message
+    });
+  });
+
+  // Post route for Create New Item
+  // ==============================================================
+  app.post("/api/createNew", function(req, res) {
+    db.Items.create({
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category,
+      reoccurring: req.body.recurring,
+      duedate: req.body.date
+    }).then(function(dbItems) {
+      res.json(dbItems);
     });
   });
 
