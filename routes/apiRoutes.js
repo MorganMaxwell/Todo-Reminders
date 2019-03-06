@@ -87,14 +87,13 @@ module.exports = function(app) {
 
   // Post route for Create New Item
   // ==============================================================
-  app.post("/api/createNew", function(req, res) {
-    console.log(req.body);
+  app.post("/api/createNew/", function (req, res) {
     db.Items.create({
       title: req.body.title,
       description: req.body.description,
       category: req.body.category,
       reoccurring: req.body.recurring,
-      duedate: req.body.date
+      dueDate: req.body.date
     })
       .then(function(dbItems) {
         console.log(dbItems);

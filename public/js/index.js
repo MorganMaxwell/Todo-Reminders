@@ -1,11 +1,9 @@
 $(document).ready(function () {
   // Get references to page elements
-  var userId = "";
-  
-  // have to have the userId for the rest of the data to be retrieved from db properly
-  function getUserData() {
-    $.ajax("/api/user_data", {
-
+  var userId = 1;
+  // grab data from the database that matches the user's ID #
+  function getUserTodos() {
+    $.ajax("/api/todos/" + userId, {
       method: "GET"
     }).then(function (result) {
       // store user's specific ID on a global variable.
@@ -29,7 +27,7 @@ $(document).ready(function () {
   // push a new Todo to the database
   function newTodo() {
     console.log("index.js ln 30")
-    let date = new Date();
+    
     let data = {
       title: $("#title").val().trim(),
       description: $("#description").val().trim(),
@@ -38,13 +36,14 @@ $(document).ready(function () {
       recurringTime: false,
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
       recurring: $('input[name=group3]:checked').val(),
-      // date: moment().format(),
-      userId: userId,
+      date: $(".datepicker").val(),
+      //userId: userId,
     };
     $.ajax("/api/createNew/", {
       method: "POST",
       data: data
     }).then(function (result) {
+      console.log(result);
       location.reload();
     });
   };
@@ -81,10 +80,11 @@ $(document).ready(function () {
       refreshExamples();
     });
   };
-
+  $(".datepicker").datepicker();
   $(".modal").modal();
   $(".collapsible").collapsible();
   $("#formSubmit").click(newTodo);
+
 
 
   // function calls
