@@ -1,8 +1,8 @@
-#Remindr
+# Remindr
 https://github.com/MorganMaxwell/Todo-Reminders
 
 ---
-##Built By
+## Built By
 * [Igor Baveda](https://github.com/ibaveda)
 * [Devin Udy](https://github.com/dmudy)
 * [Jason Harris](https://github.com/jasonharris06)
@@ -14,6 +14,7 @@ Remindr is a to-do web app designed to remind the user to complete a task.
 ---
 ## Technologies
 * Materialize
+* JavaScript
 * AJAX
 * Node
 * Express
@@ -22,3 +23,9 @@ Remindr is a to-do web app designed to remind the user to complete a task.
 ---
 ## APIs
 * Nodemailer
+---
+## How to use
+1. Create an account.
+2. Add tasks at the bottom of the screen.
+3. After creating a new task, it'll appear at the top.
+  *  You can also navigate to the task from the side enav bar.
