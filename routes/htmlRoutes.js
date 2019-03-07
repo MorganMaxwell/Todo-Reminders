@@ -18,23 +18,23 @@ module.exports = function(app) {
     }
     res.render("login");
   });
-
+  app.get("/members", isAuthenticated, function (req, res) {
+    console.log(req.body, req.params)
+    db.Items.findAll({}).then(function(dbReminders) {
+      console.log(dbReminders, "line30")
+      res.render("members", {reminders: dbReminders});
+    });
+    // where is my data?
+   
+  })
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/members", isAuthenticated, function(req, res) {
-    res.render("members");
-  });
-
-  // Load members page
-  app.get("/api/todos/:id", function(req, res) {
-    db.Items.findAll({
-      where: { id: req.params.id }
-    }).then(function(dbReminders) {
-      res.render("members", {
-        msg: "Welcome!",
-        examples: dbReminders
-      });
+  app.get("/getReminders/:id", isAuthenticated, function(req, res) {
+    db.Items.findAll({}).then(function(dbReminders) {
+      console.log(dbReminders, "line30")
+      res.render("members", {reminders: dbReminders});
     });
+    // res.render("members");
   });
 
   // Render 404 page for any unmatched routes
