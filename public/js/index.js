@@ -1,33 +1,15 @@
 $(document).ready(function () {
   // Get references to page elements
   var userId = 1;
-  // grab data from the database that matches the user's ID #
   function getUserTodos() {
-    $.ajax("/api/todos/" + userId, {
+    $.ajax("/getReminders/" + userId, {
       method: "GET"
-    }).then(function (result) {
-      // store user's specific ID on a global variable.
-      userId = result.id;
-    });
-    return userId;
+    }).then(function (result) {});
   };
-
-  // grab data from the database that matches the user's ID #
-  // function getUserTodos() {
-  //   $.ajax("/api/todos/" + userId, {
-  //     method: "GET"
-  //   }).then(function (result) {
-  //     result.render("index", { todos: result }, function (err) {
-  //       if (err) throw err;
-  //     });
-  //   });
-  // };
-
 
   // push a new Todo to the database
   function newTodo() {
-    console.log("index.js ln 30")
-    
+
     let data = {
       title: $("#title").val().trim(),
       description: $("#description").val().trim(),
@@ -88,6 +70,6 @@ $(document).ready(function () {
 
 
   // function calls
-  getUserData();
-  // getUserTodos();
+  // getUserData();
+  getUserTodos();
 });
