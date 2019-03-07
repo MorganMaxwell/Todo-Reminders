@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   // push a new Todo to the database
   function newTodo() {
+
     let data = {
       title: $("#title").val().trim(),
       description: $("#description").val().trim(),
@@ -17,13 +18,14 @@ $(document).ready(function () {
       recurringTime: false,
       // 1 is daily, 2 is weekly, 3 is monthly, 4 is yearly
       recurring: $('input[name=group3]:checked').val(),
-      // date: moment().format(),
-      userId: userId,
+      date: $(".datepicker").val(),
+      //userId: userId,
     };
     $.ajax("/api/createNew/", {
       method: "POST",
       data: data
     }).then(function (result) {
+      console.log(result);
       location.reload();
     });
   };
@@ -60,10 +62,11 @@ $(document).ready(function () {
       refreshExamples();
     });
   };
-
+  $(".datepicker").datepicker();
   $(".modal").modal();
   $(".collapsible").collapsible();
   $("#formSubmit").click(newTodo);
+
 
 
   // function calls
