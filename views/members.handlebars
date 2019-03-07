@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo center">To-Dos</a>
+    <a href="#" class="brand-logo center">RemindR</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li><a href="/daily">Daily</a></li>
       <li><a href="/weekly">Weekly</a></li>
@@ -29,13 +29,13 @@
           </thead>
 
           <tbody>
+            {{#each reminders}}
             <tr>
-              {{#each todos}}
-              {{#unless deleted}}
+
               {{> todos/todoTable}}
-              {{/unless}}
-              {{/each}}
+
             </tr>
+            {{/each}}
           </tbody>
 
         </table>
@@ -106,14 +106,16 @@
 </main>
 
 <footer class="page-footer">
-  <h5 class="white-text">Collaborators</h5>
-  <ul>
-    <li><a class="grey-text text-lighten-3" href="https://github.com/ibaveda">Igor Baveda</a></li>
-    <li><a class="grey-text text-lighten-3" href="https://github.com/dmudy">Devin Udy</a></li>
-    <li><a class="grey-text text-lighten-3" href="https://github.com/jasonharris06">Jason Harris</a></li>
-    <li><a class="grey-text text-lighten-3" href="https://github.com/MorganMaxwell">Morgan Maxwell</a></li>
-  </ul>
-  <div class="footer-copyright">
-    © 2019 Copyright
+  <div class="container">
+    <h5 class="white-text">Collaborators</h5>
+    <ul>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/ibaveda">Igor Baveda</a></li>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/dmudy">Devin Udy</a></li>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/jasonharris06">Jason Harris</a></li>
+      <li><a class="grey-text text-lighten-3" href="https://github.com/MorganMaxwell">Morgan Maxwell</a></li>
+    </ul>
+    <div class="footer-copyright">
+      © 2019 Copyright
+    </div>
   </div>
 </footer>
