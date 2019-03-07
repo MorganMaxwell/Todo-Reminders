@@ -1,9 +1,7 @@
 $(document).ready(function () {
   // Get references to page elements
   var userId = 1;
-console.log("where am i ")
   function getUserTodos() {
-    console.log("yoyoyoyo", userId)
     $.ajax("/getReminders/" + userId, {
       method: "GET"
     }).then(function (result) {});
